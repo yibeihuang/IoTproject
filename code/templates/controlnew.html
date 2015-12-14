@@ -1,0 +1,79 @@
+$def with(form,name)
+<html>
+
+ <head>
+    <meta charset="UTF-8">
+    <title>Smart Bulb</title>
+ 			<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["table"]});
+      google.setOnLoadCallback(drawTable);
+
+      //var d = $:name
+	    //document.write("hi")
+
+
+      function drawTable() {
+        var data = google.visualization.arrayToDataTable($:name);
+        /*var options = {
+          title: 'User Data',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+        */
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '30%', height: '50%'});}
+</script>
+</head>
+ <body>
+	<h1 align="center">Module Control</h1>
+ 	<form align="center"> 
+	<div id="table_div"></div>
+	</form>
+ 	<form method="POST" align="center">
+    	    $:form.render()
+	</form>
+        
+        <OBJECT classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921"
+            
+            width="640"
+            
+            height="480"
+            
+            id="vlc"
+            
+            events="True">
+            
+            <param name="MRL" value="http://192.168.0.6:8090" />
+            
+            <EMBED
+                type="application/x-vlc-plugin"
+                version="VideoLAN.VLCPlugin.2"
+                
+                width="640"
+                
+                height="480"
+                
+                //toolbar="true"
+                
+                //text="Waiting for video"
+                
+                id="vlc">
+            </EMBED>
+            
+        </OBJECT>
+        <script language="Javascript">
+            
+            var mrl="http://192.168.0.6:8090";
+            var idd = vlc.playlist.add(mrl);
+            vlc.playlist.playItem(idd);
+            //var vlc = document.getElementById("vlc");
+            //vlc.audio.toggleMute();
+            //
+            </script>
+ </body>
+
+</html>
+
